@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Authorization App</h1>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/purchasers/register}">Purchaser register</a>
+        <a th:href="@{/purchasers/login}">Purchaser login</a>
+        <a th:href="@{/vendors/register}">Vendor register</a>
+        <a th:href="@{/vendors/login}">Vendor login</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Login</h2>
+    <hr>
+
+    <form id="register-form" th:action="@{/admin/login}" method="post">
+        <label for="username">Username</label>
+        <br>
+        <input type="text" id="username" name="username" placeholder="Enter your username"/>
+        <br><br>
+
+        <label for="password">Password</label>
+        <br>
+        <input type="password" id="password" name="password" placeholder="Enter your password"/>
+        <br><br>
+
+        <button class="info" type="submit">Login</button>
+    </form>
+
+    <div th:if="${param.error}" class="alert error">Invalid username or password.</div>
+</main>
+</body>
+</html>

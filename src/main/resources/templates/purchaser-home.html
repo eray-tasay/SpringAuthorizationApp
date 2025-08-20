@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchaser Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Authorization App</h1>
+    <nav>
+        <a th:href="@{/purchasers/}">Purchaser Home</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Welcome, <span th:text="${#authentication.name}">user</span></h2>
+    <hr>
+
+    <h3>All Products</h3>
+
+    <table>
+        <tr>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Vendor</th>
+        </tr>
+
+        <tr th:each="product : ${productPage.content}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price} + '$'"></td>
+            <td th:text="${product.vendorUsername}"></td>
+            <td>
+                <form th:action="@{/purchasers/buy/products/{id}(id=${product.id})}" method="post">
+                    <button class="success" type="submit">Buy</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <div style="margin-bottom: 0.5rem;">
+        <a th:if="${productPage.hasPrevious()}" th:href="@{/purchasers/(page=${productPage.number - 1})}">Previous</a>
+        Page <span th:text="${productPage.number + 1}"></span> of <span th:text="${productPage.totalPages}"></span>
+        <a th:if="${productPage.hasNext()}" th:href="@{/purchasers/(page=${productPage.number + 1})}">Next</a>
+    </div>
+
+    <h3>My Purchases</h3>
+
+    <table>
+        <tr>
+            <th>Purchase Id</th>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Vendor</th>
+        </tr>
+
+        <tr th:each="purchase : ${purchases}">
+            <td th:text="${purchase.purchaseId}"></td>
+            <td th:text="${purchase.productId}"></td>
+            <td th:text="${purchase.productName}"></td>
+            <td th:text="${purchase.productPrice} + '$'"></td>
+            <td th:text="${purchase.vendorUsername}"></td>
+            <td>
+                <form th:action="@{/purchasers/delete/purchase/{id}(id=${purchase.purchaseId})}" method="post">
+                    <button class="danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+    <form th:action="@{/purchasers/logout}" method="post">
+        <button class="info" type="submit">Logout</button>
+    </form>
+
+    <div th:if="${errorAlert}" th:text="${alertMessage}" class="alert error"></div>
+    <div th:if="${successAlert}" th:text="${alertMessage}" class="alert success"></div>
+</main>
+</body>
+</html>

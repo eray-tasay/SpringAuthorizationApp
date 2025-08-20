@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Authorization App</h1>
+    <nav>
+        <a th:href="@{/admin/}">Admin Home</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Welcome, <span th:text="${#authentication.name}">admin</span></h2>
+    <hr>
+    <form th:action="@{/admin/logout}" method="post">
+        <button class="info" type="submit">Logout</button>
+    </form>
+</main>
+</body>
+</html>

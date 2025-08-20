@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Authorization App</h1>
+    <nav>
+        <a th:href="@{/vendors/}">Vendor Home</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Welcome, <span th:text="${#authentication.name}">vendor</span></h2>
+    <hr>
+
+    <h3>Add Product</h3>
+
+    <form th:action="@{/vendors/products/add}" method="post">
+        <label for="name">Name</label>
+        <br>
+        <input type="text" id="name" name="name"/>
+        <br><br>
+
+        <label for="price">Price</label>
+        <br>
+        <input type="text" id="price" name="price"/>
+        <br><br>
+
+        <button class="success" type="submit">Add</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Product Id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">ID</td>
+            <td th:text="${product.name}">Name</td>
+            <td th:text="${product.price} + '$'">Price</td>
+            <td>
+                <form th:action="@{/vendors/products/delete/{id}(id=${product.id})}" method="post">
+                    <button class="danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <div th:if="${errorAlert}" th:text="${alertMessage}" class="alert error"></div>
+    <div th:if="${successAlert}" th:text="${alertMessage}" class="alert success"></div>
+
+    <form th:action="@{/vendors/logout}" method="post">
+        <button class="info" type="submit">Logout</button>
+    </form>
+</main>
+</body>
+</html>
