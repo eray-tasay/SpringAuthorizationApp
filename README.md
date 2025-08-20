@@ -53,3 +53,7 @@
     </ul>
   </li>
 </ul>
+<h2>Screenshots</h2>
+<img width="1875" height="471" alt="Ekran görüntüsü 2025-08-20 104320" src="https://github.com/user-attachments/assets/ea340efa-9124-4642-a957-58f181e62c7b" />
+<img width="1875" height="955" alt="Ekran görüntüsü 2025-08-20 104433" src="https://github.com/user-attachments/assets/ae345ab7-bbdb-4862-be11-3e1b31d9cb01" />
+<img width="1874" height="1027" alt="Ekran görüntüsü 2025-08-20 104609" src="https://github.com/user-attachments/assets/a7944b2b-9c08-423b-bbb9-950b3fadc711" />
